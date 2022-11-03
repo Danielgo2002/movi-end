@@ -1,5 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { addActor } from 'src/dto/actor.dto/addActor.dto';
+import { AddActorDto } from 'src/dto/actor.dto/addActor.dto';
+import { deleteActorDto} from 'src/dto/actor.dto/deleteActor.dto';
 import { ActorService } from './actor.service';
 
 @Controller('actor')
@@ -8,14 +9,14 @@ export class ActorController {
 
 
     @Post('addActor')
-    addActor(@Body()addActorDto: addActor){
+    addActor(@Body() addActorDto: AddActorDto){
         return this.actorService.AddActor(addActorDto)
     }
 
 
-    @Post('deleteActor')
-    deleteActor(){
-        return this.actorService.deleteActor()
-    }
+    // @Post('deleteActor')
+    // deleteActor(@Body() deleteActorDto: deleteActorDto){
+    //     return this.actorService.deleteActor(deleteActorDto)
+    // }
 }
 

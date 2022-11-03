@@ -1,5 +1,6 @@
 import {  IsNotEmpty, IsNumber, IsString,  } from "class-validator";
 import { Actor } from "src/schemas/actor-schema";
+import { Director } from "src/schemas/director-schema";
 import { Movie } from "src/schemas/movie-schema";
 /**
  * @description 
@@ -23,6 +24,8 @@ export class addMovieDto {
   @IsNumber()
   time: string;
 
-  Actor: Actor[]
+  actors: Actor[]
+
+  director: string
 
 }

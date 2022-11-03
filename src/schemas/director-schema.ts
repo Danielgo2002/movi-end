@@ -15,13 +15,13 @@ export type DirectorDocument = Director & Document;
 export class Director {
 
   @Prop({required: true})
-  first_name: string
+  firstName: string
 
   @Prop({required: true})
-  last_name: string
+  lastName: string
 
   @Prop({required: true})
-  birth_date : number
+  birthDate : number
 
   @Prop({required: true})
   gender: string

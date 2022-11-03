@@ -4,7 +4,7 @@ import { Movie } from "src/schemas/movie-schema";
  * @description 
  */
 
-export class AddActorDto {
+export class AddDirectorDto {
 
   @IsNotEmpty()
   @IsString()

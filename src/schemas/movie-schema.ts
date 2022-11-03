@@ -21,12 +21,12 @@ export class Movie {
   genre: string
 
   @Prop({required: true,})
-  publish_date: number
+  publishDate: number
 
   @Prop()
-  time: number
+  time: string
 
-  @Prop({ type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Director' }]})
+  @Prop( {type: mongoose.Schema.Types.ObjectId, ref: 'Director' })
   director: DirectorDocument
 
 
