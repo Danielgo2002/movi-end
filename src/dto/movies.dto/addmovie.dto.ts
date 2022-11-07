@@ -1,31 +1,32 @@
-import {  IsNotEmpty, IsNumber, IsString,  } from "class-validator";
-import { Actor } from "src/schemas/actor-schema";
-import { Director } from "src/schemas/director-schema";
-import { Movie } from "src/schemas/movie-schema";
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { genre } from './movies.enum';
+import { Director } from 'src/schemas/director-schema';
+import { Movie } from 'src/schemas/movie-schema';
 /**
- * @description 
+ * @description
  */
 
 export class addMovieDto {
-
   @IsNotEmpty()
   @IsString()
   name: string;
 
   @IsNotEmpty()
   @IsString()
-  genre: string;
+  @IsEnum(genre)
+  genre: genre;
 
   @IsNotEmpty()
   @IsNumber()
   publishDate: number;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsString()
   time: string;
 
-  actors: Actor[]
+  @IsNotEmpty()
+  actors: string[];
 
-  director: string
-
+  @IsNotEmpty()
+  director: string;
 }
