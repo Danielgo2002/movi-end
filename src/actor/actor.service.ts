@@ -5,34 +5,27 @@ import { AddActorDto } from 'src/dto/actor.dto/addActor.dto';
 import { deleteActorDto } from 'src/dto/actor.dto/deleteActor.dto';
 import { ActorDocument } from 'src/schemas/actor-schema';
 import { Movie, MovieDocument } from 'src/schemas/movie-schema';
-
+/**
+ * @description this ActorService class inject inside the ActorModel,
+ *  and MovieModel that let us work with the database
+ */
 @Injectable()
 export class ActorService {
-    constructor(@InjectModel('Actor')private readonly ActorModel:Model <ActorDocument>, @InjectModel('Movie')private readonly MovieModel: Model<MovieDocument>){}
+  constructor(
+    @InjectModel('Actor') private readonly ActorModel: Model<ActorDocument>,
+    @InjectModel('Movie') private readonly MovieModel: Model<MovieDocument>,
+  ) {}
 
-    async AddActor(addActorDto: AddActorDto){
+  /**
+   * @description this function AddActor get params from the body req and create new actor user
+   * @param addActorDto  the params we define we expext to get in the body req
+   * @returns new actor user in the database based on the params in the addActorDto
+   */
+  async AddActor(addActorDto: AddActorDto) {
+    const ActorMovie = new this.MovieModel();
 
-        const ActorMovie = new this.MovieModel()
-
-        const user =  new this.ActorModel(addActorDto)   
-          await user.save() 
-          return user
-
-            
-    }
-
-        
-
-
-
-    
-
-    // async deleteActor(deleteActorDto: deleteActorDto){
-    //     const user = new this.ActorModel(deleteActorDto)
-    //     const pop = await user.populate('movies')
-    //     for await(const actor of ()){
-    //         actor.delete()
-    //     }
-        
-    // }
+    const user = new this.ActorModel(addActorDto);
+    await user.save();
+    return user;
+  }
 }

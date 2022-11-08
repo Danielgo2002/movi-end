@@ -1,11 +1,10 @@
-import {  IsNotEmpty, IsNumber, IsString,  } from "class-validator";
-import { Movie } from "src/schemas/movie-schema";
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Movie } from 'src/schemas/movie-schema';
 /**
- * @description 
+ * @description this class AddDirectorDto define how we want to  get the params in the route request addDirector
  */
 
 export class AddDirectorDto {
-
   @IsNotEmpty()
   @IsString()
   firstName: string;
@@ -22,6 +21,9 @@ export class AddDirectorDto {
   @IsString()
   gender: string;
 
-  movies: Movie[]
-
+  /**
+   * @description param movies that contain an arry of movies.id(based on the connection in director schema
+   * with movie schema)
+   */
+  movies: Movie[];
 }
