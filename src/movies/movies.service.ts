@@ -71,27 +71,44 @@ export class MoviesService {
     }
   }
   /**
-   *
-   * @param deleteMovieDto
-   * @returns
+   * @description this function deleteMovie take params from the body deleteMoviedto and delete the movie from the
+   * database also delete the movie from the actors and director movie array
+   * @param deleteMovieDto the body params based on the deleteMoviedto
+   * @returns delete the movie from the database also delete the movie(id) from the actors.movies and director.movies
+   * array
    */
   async deleteMovie(deleteMovieDto: DeleteMovieDto) {
     try {
+      /**
+       * @description here we find the movie by his id based of the deleteMovieDto
+       * and delete the movie from the database. if there is no movie we throw err
+       */
       const movie = await this.movieModel.findById(deleteMovieDto.id);
       if (!movie) {
         return 'movie not exsist';
       }
-
+      /**
+       *  here we find the director.id based on the director.id property in the movie and check if
+       * the director exsist
+       */
       const director = await this.directorModel.findById(movie.director);
       if (!director) {
         return 'director not exsist';
       }
-
+      /**
+       * @description here we take the director and go to his movies property then we return the director.movie.id
+       * turn it to string and check if the movie pass the test(filter) if the movie not equeal he stay if eaqul delete from
+       * the array
+       */
       director.movies = director.movies.filter(function (movie) {
         return movie._id.toString() !== deleteMovieDto.id;
       });
       await director.save();
 
+      /**
+       * here we use for loop to iterate trout the actors.movies array and check if they pass the test we made
+       * in the filter function
+       */
       for await (const actor of movie.actors) {
         const result = await this.actorModel.findById(actor);
         result.movies = result.movies.filter(function (movie) {
